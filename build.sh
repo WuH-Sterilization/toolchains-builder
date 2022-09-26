@@ -22,10 +22,11 @@ if [ "$#" -ne 1 ]; then
 	echo "Usage:" >&2
 	echo "  $0 armv5-eabi" >&2
 	echo "  $0 armv7-eabihf" >&2
+	echo "  $0 x86-i686" >&2
 	exit 1
 fi
 
-if [[ "$1" != armv5-eabi && "$1" != armv7-eabihf ]]; then
+if [[ "$1" != armv5-eabi && "$1" != armv7-eabihf && "$1" != x86-i686 ]]; then
 	echo "Unsupported platform" >&2
 	exit 1
 fi
@@ -34,13 +35,13 @@ if [ ! -d "./buildroot" ]; then
 	git clone https://github.com/bootlin/buildroot-toolchains.git buildroot
 fi
 
-if [ -f "$1"--uclibc-backtrace--stable-2018.11-1.tar.bz2 ]; then
-	rm "$1"--uclibc-backtrace--stable-2018.11-1.tar.bz2
+if [ -f "$1"--uclibc-backtrace--stable-2021.05.tar.bz2 ]; then
+	rm "$1"--uclibc-backtrace--stable-2021.05.tar.bz2
 fi
 
 cd buildroot
 git clean -fdx
-git checkout toolchains.bootlin.com-stable-2018.11-1
+git checkout toolchains.bootlin.com-stable-2021.5
 
 cat ../"$1"-uclibc-config > ./.config
 cp ../uclibc-backtrace.fragment ./
@@ -50,5 +51,5 @@ make clean
 make
 make sdk
 
-cp ../"$1"-readme.txt ./"$1"--uclibc--stable-2018.11-1
-tar -cjf ../"$1"--uclibc-backtrace--stable-2018.11-1.tar.bz2 "$1"--uclibc--stable-2018.11-1
+cp ../"$1"-readme.txt ./"$1"--uclibc--stable-2021.05
+tar -cjf ../"$1"--uclibc-backtrace--stable-2021.05.tar.bz2 "$1"--uclibc--stable-2021.5
