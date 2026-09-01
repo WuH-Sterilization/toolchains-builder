@@ -36,7 +36,7 @@ if [[ "$1" != armv5-eabi && "$1" != armv7-eabihf && "$1" != x86-i686 ]]; then
 fi
 
 if [ ! -d "./buildroot" ]; then
-	git clone https://github.com/bootlin/buildroot-toolchains.git buildroot
+	git clone https://github.com/buildroot/buildroot buildroot
 fi
 
 if [ -f "${tc_tar}" ]; then
