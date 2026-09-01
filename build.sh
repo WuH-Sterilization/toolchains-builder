@@ -26,7 +26,7 @@ if [ "$#" -ne 1 ]; then
 	exit 1
 fi
 
-tc_tag="2025.02"
+tc_tag="2025.02.16"
 tc_dir="$1--uclibc--stable-${tc_tag}"
 tc_tar="$1--uclibc--cortex_a7--ssp--stable-${tc_tag}.tar.bz2"
 
@@ -36,7 +36,7 @@ if [[ "$1" != armv5-eabi && "$1" != armv7-eabihf && "$1" != x86-i686 ]]; then
 fi
 
 if [ ! -d "./buildroot" ]; then
-	git clone https://github.com/bootlin/buildroot-toolchains.git buildroot
+	git clone https://github.com/buildroot/buildroot buildroot
 fi
 
 if [ -f "${tc_tar}" ]; then
